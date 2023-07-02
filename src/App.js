@@ -10,6 +10,7 @@ import ListarPersonas from './fragment/ListarPersonas';
 import Actualizar from './fragment/Actualizar';
 import EditarPersona from './fragment/EditarPersona';
 import CambiarEstado from './fragment/CambiarEstado';
+import ListarMatriculas from './fragment/ListarMatriculas';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
       <Route path='/paginaPrincipal/listarregistros' element={<ListarPersonas />} />
       <Route path='/registros/edicion' element={<EditarPersona/>}/>
       <Route path='/registros/cambioestado' element={<CambiarEstado/>}/>
+      <Route path='/registros/listamatriculas' element={<ListarMatriculas/>}/>
       <Route path='/act' element={<Actualizar />} /> 
 
     </Routes>

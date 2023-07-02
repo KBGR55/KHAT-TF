@@ -37,6 +37,7 @@ export const Matricula = async (key) => {
         method: "GET",
         headers: cabeceras
     })).json();
+    console.log("datos", datos);
     return datos;
 }
 

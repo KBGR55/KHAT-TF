@@ -24,6 +24,9 @@ const PaginaPincipalAdmin = () => {
                                     <li class="nav-item">
                                         <a class="nav-link" href="/paginaPrincipal/listarregistros" style={{ color: '#F1F6F9' }}>Registrar</a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/registros/listamatriculas" style={{ color: '#F1F6F9' }}>Lista Matriculas</a>
+                                    </li>
                                 </ul>
                             </div>
                         </nav>
