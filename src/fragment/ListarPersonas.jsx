@@ -5,12 +5,13 @@ import { borrarSesion, getToken } from '../utilidades/Sessionutil';
 import React, { useState } from 'react';
 import { useNavigate } from "react-router";
 import Footer from "./Footer";
-import EditarPersona from "./EditarPersona";
+import EditarPractica from "./EditarPractica";
 import CambiarEstado from "./CambiarEstado";
 import RegistrarEstudiantes from "./RegistrarEstudiantes";
 import { ListadoRegistros, ObtenerPersona, Personas } from "../hooks/Conexion";
 import { Link, unstable_HistoryRouter } from "react-router-dom";
 import GenerarMatricula from "./GenerarMatricula";
+import EditarPersona from "./EditarPersona";
 
 export const ListarPersonas = () => {
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import mensajes from '../utilidades/Mensajes';
@@ -26,6 +26,7 @@ function AsignarActividad() {
               mensajes(info.msg, 'error', 'Error');
             } else {
               mensajes(info.msg);
+              navegation("/practicas");
             }
           }
           );
@@ -50,6 +51,10 @@ function AsignarActividad() {
           }
         });
       }
+
+      useEffect(() => {
+        setLlasignaturas(false);
+      }, []);
     
     return (
         <div className="wrapper">

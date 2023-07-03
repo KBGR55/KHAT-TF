@@ -3,15 +3,14 @@ import Login from './fragment/Login';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import PresentarEstudiantes from './fragment/PresentarEstudiantes';
 import Actividaes from './fragment/Actividades';
-import AsignarActividad from './fragment/AsignarActividad';
 import PaginaPrincipal from './fragment/PaginaPrincipal ';
 import PaginaPincipalAdmin from './fragment/PaginaPincipalAdmin';
 import ListarPersonas from './fragment/ListarPersonas';
-import Actualizar from './fragment/Actualizar';
 import EditarPersona from './fragment/EditarPersona';
 import CambiarEstado from './fragment/CambiarEstado';
 import ListarMatriculas from './fragment/ListarMatriculas';
 import { ListarPracticas } from './fragment/ListarPracticas';
+import Actualizar from './fragment/Actualizar'
 
 
 function App() {
@@ -22,7 +21,8 @@ function App() {
       <Route path='/inicio/listarActividades' element={<Actividaes />} />
       <Route path='/paginaPrincipal' element={<PaginaPincipalAdmin/>} />
       <Route path='/paginaPrincipal/listarAlumnos' element={<PresentarEstudiantes />} />     
-      <Route path='/paginaPrincipal/practicas' element={<ListarPracticas/>} />
+      <Route path='/practicas' element={<ListarPracticas/>} />
+       
       
       <Route path='/paginaPrincipal/listarregistros' element={<ListarPersonas />} />
       <Route path='/registros/edicion' element={<EditarPersona/>}/>

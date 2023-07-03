@@ -129,7 +129,7 @@ export const GuardarMatricula = async (data, key) => {
     return datos;
 }
 
-export const GuardarPractica= async (data, key) => {
+export const GuardarPractica = async (data, key) => {
     const headers = {
         "Content-Type": "application/json",
         "X-API-TOKEN": key
@@ -156,12 +156,39 @@ export const ActualizarPersona = async (data, key) => {
     return datos;
 }
 
+export const ActualizarPractica = async (data, key) => {
+    const headers = {
+        "Accept": 'aplication/json',
+        "Content-Type": 'application/json',
+        "X-API-TOKEN": key
+    };
+    const datos = await (await fetch(URLN + "/practicas/modificar", {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(data)
+    })).json();
+    return datos;
+}
+
 export const ChanceEstado = async (data, key) => {
     const headers = {
         "Content-Type": "application/json",
         "X-API-TOKEN": key
     };
     const datos = await (await fetch(URLN + "/personas/cambiarEstado", {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(data)
+    })).json();
+    return datos;
+}
+export const ChanceEstadoPractica = async (data, key) => {
+    const headers = {
+        "Accept": 'aplication/json',
+        "Content-Type": 'application/json',
+        "X-API-TOKEN": key
+    };
+    const datos = await (await fetch(URLN + "/practicas/cambiarEstado", {
         method: "POST",
         headers: headers,
         body: JSON.stringify(data)
@@ -207,7 +234,15 @@ export const ObtenerPersona = async (id, key) => {
     console.log("TRAE", datos);
     return datos;
 }
-
+export const ObtenerPractica = async (id, key) => {
+    var cabeceras = { "X-API-TOKEN": key };
+    const datos = await (await fetch(`${URLN}/practicas/obtener/${id}`, {
+        method: "GET",
+        headers: cabeceras
+    })).json();
+    console.log("TRAE", datos);
+    return datos;
+}
 
 export const ObtenerPeriodo = async (id, key) => {
     var cabeceras = { "X-API-TOKEN": key };

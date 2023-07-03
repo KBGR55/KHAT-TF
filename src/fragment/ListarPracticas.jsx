@@ -7,10 +7,9 @@ import { useNavigate } from "react-router";
 import Footer from "./Footer";
 import EditarPersona from "./EditarPersona";
 import AsignarActividad from "./AsignarActividad";
-import CambiarEstado from "./CambiarEstado";
-import { ListadoPracticas, ObtenerAsignatura, Personas } from "../hooks/Conexion";
+import { ListadoPracticas, ObtenerAsignatura, ObtenerPractica, ChanceEstadoPractica } from "../hooks/Conexion";
 import { Link, unstable_HistoryRouter } from "react-router-dom";
-import GenerarMatricula from "./GenerarMatricula";
+import EditarPractica from "./EditarPractica";
 
 export const ListarPracticas = () => {
 
@@ -20,9 +19,10 @@ export const ListarPracticas = () => {
     const [data, setData] = useState([]);
     const navegation = useNavigate();
     const [llPracticas, setllPracticas] = useState(false);
-    const [personaObtenida, setpersonaObtenida] = useState([]);
+    const [practicaObtenida, setpracticaObtenida] = useState([]);
     const [searchValue, setSearchValue] = useState(''); // PARA LA BUSQUEDA POR ID
     const handleSearchChange = (event) => { setSearchValue(event.target.value); }; // PARA LA BUSQUEDA POR ID
+    const [asignatura, setAsignatura] = useState([]);
 
     //SHOW EDITAR
     const [showEdit, setShowEdit] = useState(false);
@@ -31,35 +31,28 @@ export const ListarPracticas = () => {
 
     //SHOW CAMBIAR ESTADO
     const [showChance, setShowChance] = useState(false);
-    const handleShowChance = () => setShowChance(true);
     const handleCloseChance = () => setShowChance(false);
-
-    //SHOW MATRICULAS
-    const [showMatricula, setshowMatricula] = useState(false);
-    const handleShowMatricula = () => setshowMatricula(true);
-    const handleCloseMatricula = () => setshowMatricula(false);
-    const [asignatura, setAsignatura] = useState([]);
 
     if (!llPracticas) {
         ListadoPracticas(getToken()).then((info) => {
             if (info.code !== 200 && info.msg == 'Acceso denegado. Token a expirado') {
                 borrarSesion();
                 mensajes(info.mensajes);
-                navegation("/sesion")
+                navegation("/practicas")
             } else {
                 setData(info.info);
                 setllPracticas(true);
             }
         })
         for (let index = 0; index < data.length; index++) {
-            Asignaturas(data[index].external_id_cursa);            
+            Asignaturas(data[index].external_id_cursa);
         }
     }
 
     //ACCION HABILITAR EDICION CAMPOS
     const handleChange = e => {
         const { name, value } = e.target;
-        setpersonaObtenida((prevState) => ({
+        setpracticaObtenida((prevState) => ({
             ...prevState,
             [name]: value
         }));
@@ -75,6 +68,18 @@ export const ListarPracticas = () => {
             }
         })
     };
+    //ACCION OBTENER DATOS DE UNA PRACTICA
+    const obtenerId = (id) => {
+        console.log(id);
+        ObtenerPractica(id, getToken()).then((info) => {
+            var datos = info.info;
+            if (info.code !== 200) {
+                mensajes(info.mensajes);
+            } else {
+                setpracticaObtenida(datos);
+            }
+        })
+    };
 
     //CAMBIAR FORMATO FECHA
     const obtenerFechaFormateada = (fechaString) => {
@@ -84,6 +89,20 @@ export const ListarPracticas = () => {
         const month = ('0' + (fecha.getMonth() + 1)).slice(-2);
         const day = ('0' + fecha.getDate()).slice(-2);
         return `${year}-${month}-${day}`;
+    };
+
+    const handleShowChance = (id) => {
+        var datos = {
+            "external_id": id
+          };
+        ChanceEstadoPractica(datos, getToken()).then((info) => {
+            if (info.code !== 200) {
+                mensajes(info.msg, 'error', 'Error');
+            } else {
+                mensajes(info.msg);
+                navegation('/practicas');
+            }
+        });
     };
 
     return (
@@ -99,7 +118,9 @@ export const ListarPracticas = () => {
                     </div>
                     <div className="col-sm-6 mt-5 mb-4 text-gred d-flex justify-content-end">
                         <Button variant="primary" style={{ backgroundColor: "#212A3E" }} onClick={handleShow}>
-                           
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                            </svg>
                             <span style={{ marginLeft: '5px' }}>Asignar</span>
                         </Button>
                         <Link to="/paginaPrincipal" className="btn btn-secondary">
@@ -126,6 +147,28 @@ export const ListarPracticas = () => {
                                     <td className="text-center" style={{ backgroundColor: "#FFFFFF", border: "none" }}>{obtenerFechaFormateada(practica.fecha_habilitada)}</td>
                                     <td className="text-center" style={{ backgroundColor: "#FFFFFF", border: "none" }}>{obtenerFechaFormateada(practica.fecha_entrega)}</td>
                                     <td className="text-center" style={{ backgroundColor: "#FFFFFF", border: "none" }}>{practica.nombre}</td>
+                                    <td>
+                                        <div style={{ display: 'flex', gap: '10px' }}>
+                                            <Button variant="btn btn-outline-info btn-rounded" onClick={() => {
+                                                handleShowEdit();
+                                                obtenerId(practica.external_id);
+                                            }}>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                                </svg>
+                                            </Button>
+
+                                            <Button variant="btn btn-outline-secondary btn-rounded" onClick={() => {
+                                                handleShowChance(practica.external_id);
+                                            }}>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                                    <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                                </svg>
+                                            </Button>
+
+                                        </div>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
@@ -146,7 +189,7 @@ export const ListarPracticas = () => {
                             <Modal.Title>Agregar actividad</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                         <AsignarActividad></AsignarActividad>
+                            <AsignarActividad></AsignarActividad>
                         </Modal.Body>
                         <Modal.Footer>
                             <Button variant="secondary" onClick={handleClose}>
@@ -165,64 +208,14 @@ export const ListarPracticas = () => {
                         keyboard={true}
                     >
                         <Modal.Header closeButton>
-                            <Modal.Title>Editar registro</Modal.Title>
+                            <Modal.Title>Editar practica</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <EditarPersona personaObtenida={personaObtenida} handleChange={handleChange} />
+                            <EditarPractica practicaObtenida={practicaObtenida} handleChange={handleChange} />
                         </Modal.Body>
 
                         <Modal.Footer>
                             <Button variant="secondary" onClick={() => { handleCloseEdit(); setllPracticas(false); }}>
-                                Cerrar
-                            </Button>
-
-
-                        </Modal.Footer>
-                    </Modal>
-                </div>
-
-                {/* < VENTANA MODAL CAMBIAR ESTADO */}
-                <div className="model_box">
-                    <Modal
-                        show={showChance}
-                        onHide={handleCloseChance}
-                        //backdrop="static"
-                        keyboard={true}
-                    >
-                        <Modal.Header closeButton>
-                            <Modal.Title>Cambiar estado</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <CambiarEstado personaObtenida={personaObtenida} handleChange={handleChange} />
-                        </Modal.Body>
-
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={() => { handleCloseChance(); setllPracticas(false); }}>
-                                Cerrar
-                            </Button>
-
-
-                        </Modal.Footer>
-                    </Modal>
-                </div>
-
-                {/* < VENTANA MODAL GENERAR MATRICULA */}
-                <div className="model_box">
-                    <Modal
-                        show={showMatricula}
-                        onHide={handleCloseMatricula}
-                        //backdrop="static"
-                        keyboard={true}
-                    >
-                        <Modal.Header closeButton>
-                            <Modal.Title>Generar Matricula</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <GenerarMatricula personaObtenida={personaObtenida} handleChange={handleChange} />
-                        </Modal.Body>
-
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={() => { handleCloseMatricula()}}>
                                 Cerrar
                             </Button>
 
