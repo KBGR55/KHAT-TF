@@ -16,10 +16,16 @@ const PaginaPincipalAdmin = () => {
                                 <a class="navbar-brand" style={{ color: '#F1F6F9' }}>Area personal</a>
                                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                                     <li class="nav-item active">
-                                        <a class="nav-link" href="/paginaPincipal/asignarActividades" target='_blank' style={{ color: '#F1F6F9' }}>Asignar Actividades</a>
+                                        <a class="nav-link" href="/paginaPrincipal/practicas" target='_blank' style={{ color: '#F1F6F9' }}>Practicas</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/paginaPincipal/listarAlumnos" target='_blank' style={{ color: '#F1F6F9' }}>Alumnos</a>
+                                        <a class="nav-link" href="/paginaPrincipal/listarAlumnos" target='_blank' style={{ color: '#F1F6F9' }}>Alumnos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/paginaPrincipal/listarregistros" style={{ color: '#F1F6F9' }}>Registrar</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/registros/listamatriculas" style={{ color: '#F1F6F9' }}>Lista Matriculas</a>
                                     </li>
                                 </ul>
                             </div>
