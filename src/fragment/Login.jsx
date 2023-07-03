@@ -1,9 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useForm } from 'react-hook-form';
-//import {InicioSesion} from '../hooks/Conexion'
-import swal from 'sweetalert';
+import { InicioSesion, obtener } from '../hooks/Conexion'
+import { getToken, saveRol, saveToken } from '../utilidades/Sessionutil';
 import { useNavigate } from 'react-router';
-//import mensajes from '../utilidades/Mensajes';
+import mensajes from '../utilidades/Mensajes';
 import logo from '../logo.jpg';
 
 const Login = () => {
@@ -15,8 +15,32 @@ const Login = () => {
             "correo": data.correo,
             "clave": data.clave
         };
-        console.log("Datos inicio:", datos);
-        //Aqui va la funcion de inicioSecion
+
+        InicioSesion(datos).then((info) => {
+            if (info.code !== 200) {
+                mensajes(info.msg, "error", "error")
+            } else {
+                mensajes(info.msg);
+                saveToken(info.token);
+                var dataAux = {
+                    id_persona: info.user.id
+                }
+                obtener(dataAux, getToken(), "persona_rol").then((info) => {
+                    if (info.code !== 200) {
+                        mensajes(info.msg, "error", "error")
+                    } else {
+                        saveRol(info.rol.tipo);
+                        if (info.rol.tipo === "elusuario_noob") {
+                            navegation("/inicio");
+                        } else {
+                            navegation("/paginaPrincipal");
+                        }
+
+                    }
+                })
+                mensajes(info.msg);
+            }
+        })
     };
     return (
 
@@ -26,9 +50,9 @@ const Login = () => {
                     <div className="col col-xl-10">
                         <div className="card" style={{ 'border-radius': '1rem' }}>
                             <div className="row g-0">
-                                
+
                                 <div className="col-md-6 col-lg-5 d-none d-md-block" style={{ textAlign: 'center', lineHeight: '100%' }}>
-                                    <img src={logo} alt="logo KHAT" class="w-100 rounded-t-5 rounded-tr-lg-0 rounded-bl-lg-5" style={{ borderRadius: '1rem 0 0 1rem'}} />
+                                    <img src={logo} alt="logo KHAT" class="w-100 rounded-t-5 rounded-tr-lg-0 rounded-bl-lg-5" style={{ borderRadius: '1rem 0 0 1rem' }} />
                                 </div>
                                 <div className="col-md-6 col-lg-7 d-flex align-items-center">
                                     <div className="card-body p-4 p-lg-5 text-black">
