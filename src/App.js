@@ -1,23 +1,46 @@
 import './App.css';
 import Login from './fragment/Login';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { estaSesion, getRol, getToken } from './utilidades/Sessionutil';
 import PresentarEstudiantes from './fragment/PresentarEstudiantes';
-import Actividaes from './fragment/Actividades';
+import Actividades from './fragment/Actividades';
 import AsignarActividad from './fragment/AsignarActividad';
 import Laboratorio from './fragment/Laboratorio';
 import PaginaPrincipal from './fragment/PaginaPrincipal ';
-import PaginaPincipalAdmin from './fragment/PaginaPincipalAdmin';
+import PaginaPrincipalAdmin from './fragment/PaginaPrincipalAdmin';
 
 function App() {
+
+  const MiddewareSesion = ({ children }) => {
+    const autenticado = estaSesion();
+
+    if (autenticado) {
+      return children
+    } else {
+
+      return <Navigate to='/' />;
+
+    }
+  }
+
+  const MiddewareRol = ({ children}) => {
+    const rol = getRol();
+    if (rol === "elfucking_admin") {
+      return children
+    }else{
+      return <Navigate to= "/"/>
+    }
+  }
   return (
     <Routes>
       <Route path='/' element={<Login />} />
-      <Route path='/inicio' element={<PaginaPrincipal />} />
-      <Route path='/inicio/listarActividades' element={<Actividaes />} />
-      <Route path='/inicio/laboratorio' element={<Laboratorio />} />
-      <Route path='/paginaPincipal' element={<PaginaPincipalAdmin/>} />
-      <Route path='/paginaPincipal/listarAlumnos' element={<PresentarEstudiantes />} />
-      <Route path='/paginaPincipal/asignarActividades' element={<AsignarActividad />} />
+      <Route path='/inicio' element={<MiddewareSesion><PaginaPrincipal /></MiddewareSesion>} />
+      <Route path='/inicio/listarActividades' element={<MiddewareSesion><Actividades /></MiddewareSesion>} />
+      <Route path='/inicio/laboratorio' element={<MiddewareSesion><Laboratorio /></MiddewareSesion>} />
+
+      <Route path='/paginaPrincipal' element={<MiddewareRol><MiddewareSesion><PaginaPrincipalAdmin /></MiddewareSesion></MiddewareRol>} />
+      <Route path='/paginaPincipal/listarAlumnos' element={<MiddewareRol><MiddewareSesion><PresentarEstudiantes /></MiddewareSesion></MiddewareRol>} />
+      <Route path='/paginaPincipal/asignarActividades' element={<MiddewareRol><MiddewareSesion><AsignarActividad /></MiddewareSesion></MiddewareRol>} />
     </Routes>
   );
 }
