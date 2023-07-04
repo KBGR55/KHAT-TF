@@ -108,7 +108,7 @@ const GenerarMatricula = ({ personaObtenida, handleChange }) => {
                                                     {...register('periodo', { required: true })}
                                                     onChange={(e) => setPeriodoSeleccionado(e.target.value)}
                                                 >
-                                                    <option>Seleccione un rol</option>
+                                                    <option>Seleccione un periodo</option>
                                                     {periodo.map((m, i) => (
                                                         <option key={i} value={m.external_id}>
                                                             {m.mes_comienzo} - {m.mes_culminacion} - {m.anio_periodo}

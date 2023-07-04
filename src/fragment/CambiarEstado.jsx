@@ -10,8 +10,6 @@ const CambiarEstado = ({ personaObtenida, handleChange }) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navegation = useNavigate();
 
-    console.log("ASH", personaObtenida);
-
     const editar = async () => {
 
         var estado;

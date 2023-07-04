@@ -178,7 +178,7 @@ const RegistrarEstudiantes = () => {
                                             </div>
                                         </div>
 
-                                        {/** ESCOGER TIPO DE ROL 
+                                        {/** ESCOGER TIPO DE ROL */}
                         <div className="col-md-6">
                           <div className="form-group">
                             <label>Rol</label>
@@ -198,9 +198,9 @@ const RegistrarEstudiantes = () => {
                               <div className='alert alert-danger'>Seleccione un rol</div>
                             )}
                           </div>
-                        </div>*/}
+                        </div>
 
-                                        {/** ESCOGER TIPO DE ROL */}
+                                        {/** ESCOGER TIPO DE ROL 
                                         <div className="col-md-6">
                                             <div className="form-group">
                                                 <label>Tipo de Identificación</label>
@@ -212,7 +212,7 @@ const RegistrarEstudiantes = () => {
                                                     <div className='alert alert-danger'>Seleccione un rol</div>
                                                 )}
                                             </div>
-                                        </div>
+                                        </div>*/}
 
                                         {/** CORREO ELECTRÓNICO */}
                                         <div className="col-md-12">

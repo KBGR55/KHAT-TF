@@ -18,9 +18,7 @@ const PaginaPincipalAdmin = () => {
                                     <li class="nav-item active">
                                         <a class="nav-link" href="/paginaPrincipal/asignarActividades" target='_blank' style={{ color: '#F1F6F9' }}>Asignar Actividades</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="/paginaPrincipal/listarAlumnos" target='_blank' style={{ color: '#F1F6F9' }}>Alumnos</a>
-                                    </li>
+
                                     <li class="nav-item">
                                         <a class="nav-link" href="/paginaPrincipal/listarregistros" style={{ color: '#F1F6F9' }}>Registrar</a>
                                     </li>

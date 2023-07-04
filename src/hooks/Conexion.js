@@ -52,6 +52,30 @@ export const Personas = async (key) => {
     return datos;
 }
 
+export const DadosBaja = async (key) => {
+    const cabeceras = {
+        "X-API-TOKEN": key
+    };
+    const datos = await (await fetch(URLN + "/personasDadasBaja", {
+        method: "GET",
+        headers: cabeceras
+    })).json();
+    console.log("KKKK", datos);
+    return datos;
+}
+
+export const Activos = async (key) => {
+    const cabeceras = {
+        "X-API-TOKEN": key
+    };
+    const datos = await (await fetch(URLN + "/personasActivas", {
+        method: "GET",
+        headers: cabeceras
+    })).json();
+    console.log("KKKK", datos);
+    return datos;
+}
+
 export const ListadoRegistros = async (key) => {
     const cabeceras = {
         "X-API-TOKEN": key

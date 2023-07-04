@@ -8,7 +8,7 @@ import Footer from "./Footer";
 import EditarPersona from "./EditarPersona";
 import CambiarEstado from "./CambiarEstado";
 import RegistrarEstudiantes from "./RegistrarEstudiantes";
-import { ListadoRegistros, ObtenerPersona, Personas } from "../hooks/Conexion";
+import { Activos, ListadoRegistros, ObtenerPersona, Personas } from "../hooks/Conexion";
 import { Link, unstable_HistoryRouter } from "react-router-dom";
 import GenerarMatricula from "./GenerarMatricula";
 
@@ -86,30 +86,51 @@ export const ListarPersonas = () => {
 
     return (
         <div className="container">
-
-            <div className="col-sm-6 mt-5 mb-4 text-gred d-flex justify-content-end">
-
-            </div>
-            <div className="crud shadow-lg p-3 mb-5 mt-5 bg-body rounded">
-                <div className="row ">
-                    <div className="col-sm-6 mt-5 mb-4 text-gred" style={{ color: "#212A3E" }}>
-                        <h2 style={{ fontWeight: 'bold', whiteSpace: 'nowrap' }}>Listado de Registros en la plataforma</h2>
-                    </div>
-                    <div className="col-sm-6 mt-5 mb-4 text-gred d-flex justify-content-end">
-                        <Button variant="primary" style={{ backgroundColor: "#212A3E" }} onClick={handleShow}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
-                                <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Zm-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                <path d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z" />
-                            </svg>
-                            <span style={{ marginLeft: '5px' }}>Agregar</span>
-                        </Button>
-                        <Link to="/paginaPrincipal" className="btn btn-secondary">
-                            Volver a la página principal
-                        </Link>
-                    </div>
-
+            <div className="row">
+                <div className="col-sm-6 mt-5 mb-4 text-gred">
+                    <h2 style={{ fontWeight: 'bold', whiteSpace: 'nowrap' }}>Listado de Registros en la plataforma</h2>
+                </div>
+                <div className="col-sm-6 mt-5 mb-4 text-gred d-flex justify-content-end">
 
                 </div>
+            </div>
+            <div className="crud shadow-lg p-3 mb-5 mt-5 bg-body rounded" style={{ display: 'flex', justifyContent: 'flex-end' }}>
+
+                <div className="button-container">
+                    <div className="sub-container">
+                        <Link to="/registros/listainactivos" className="btn btn-primary" style={{ backgroundColor: "#212A3E", marginLeft: '10px' }}>
+                            Estudiantes Dados de Baja
+                        </Link>
+
+                        <Link to="/registros/listaactivos" className="btn btn-primary" style={{ backgroundColor: "#212A3E", marginLeft: '10px' }}>
+                            Estudiantes Activos
+                        </Link>
+
+                    </div>
+                    <div className="sub-container">
+
+                    </div>
+                </div>
+                <Link to="/paginaPrincipal" className="btn btn-secondary" style={{ marginLeft: '10px' }}>
+                    Volver a la página principal
+                </Link>
+            </div>
+
+
+
+            <div className="crud shadow-lg p-3 mb-5 mt-5 bg-body rounded" style={{ display: 'flex', flexDirection: 'column' }}>
+                <div style={{ marginLeft: 'auto', marginBottom: '10px' }}>
+                    <Button variant="primary" style={{ backgroundColor: "#212A3E" }} onClick={handleShow}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
+                            <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Zm-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            <path d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z" />
+                        </svg>
+                        <div></div>
+                        Agregar
+
+                    </Button>
+                </div>
+
                 <div className="col">
                     <table className="table table-striped">
                         <thead className="table-dark">
@@ -124,7 +145,6 @@ export const ListarPersonas = () => {
                                 <th className="text-center" style={{ backgroundColor: "#212A3E", color: "#FFFFFF", border: "none" }}>Direccion</th>
                                 <th className="text-center" style={{ backgroundColor: "#212A3E", color: "#FFFFFF", border: "none" }}>Estado</th>
                                 <th className="text-center" style={{ backgroundColor: "#212A3E", color: "#FFFFFF", border: "none" }}>Acciones</th>
-                                <th className="text-center" style={{ backgroundColor: "#212A3E", color: "#FFFFFF", border: "none" }}>Generar Matricula</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -164,20 +184,6 @@ export const ListarPersonas = () => {
                                             </Button>
 
                                         </div>
-                                    </td>
-                                    <td>
-                                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px' }}>
-                                            <Button variant="btn btn-outline-success btn-rounded" onClick={() => {
-                                                handleShowMatricula();
-                                                obtenerId(estudiante.persona.external_id);
-                                            }}>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-check" viewBox="0 0 16 16">
-                                                    <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514ZM11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
-                                                    <path d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z" />
-                                                </svg>
-                                            </Button>
-                                        </div>
-
                                     </td>
                                 </tr>
                             ))}
@@ -275,7 +281,7 @@ export const ListarPersonas = () => {
                         </Modal.Body>
 
                         <Modal.Footer>
-                            <Button variant="secondary" onClick={() => { handleCloseMatricula()}}>
+                            <Button variant="secondary" onClick={() => { handleCloseMatricula() }}>
                                 Cerrar
                             </Button>
 
@@ -285,7 +291,7 @@ export const ListarPersonas = () => {
                 </div>
 
             </div>
-        </div>
+        </div >
     );
 }
 
