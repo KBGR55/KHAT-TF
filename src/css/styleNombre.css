@@ -1,0 +1,29 @@
+.sidebar {
+    padding: 10px;
+    height: 100%;
+}
+
+.sidebar h1 {
+    font-weight: bold;
+    color: #212A3E;
+    font-size: 50px; 
+    margin-bottom: 10px;
+}
+
+.sidebar p {
+    font-weight: bold;
+    color: #212A3E;
+}
+
+.container-docentes {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  margin: 20px; /* Ajusta el margen según sea necesario */
+  border: 2px solid #F1F6F9;
+  background-color: #F1F6F9;
+  border-radius: 15px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}

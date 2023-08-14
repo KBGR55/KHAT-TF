@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useForm } from 'react-hook-form';
-import { ActualizarPractica, GuardarPersona, Roles } from '../hooks/Conexion';
+import { Actualizar} from '../hooks/Conexion';
 import { useState } from 'react';
 import mensajes from '../utilidades/Mensajes';
 import { borrarSesion, getToken } from '../utilidades/Sessionutil';
@@ -32,12 +32,12 @@ const EditarPractica = ({ practicaObtenida, handleChange }) => {
       "external_id": practicaObtenida.external_id
     };
 
-    ActualizarPractica(datos, getToken()).then((info) => {
+    Actualizar(datos, getToken()).then((info) => {
       if (info.code !== 200) {
         mensajes(info.msg, 'error', 'Error');
       } else {
         mensajes(info.msg);
-        navegation('/practicas');
+        navegation('/PaginaPrincipalAdmin/asignarActividades');
       }
     });
   }
@@ -88,7 +88,7 @@ const EditarPractica = ({ practicaObtenida, handleChange }) => {
 
                   </div>
                   <div className="d-flex justify-content-between">
-                    <a href="/practicas" className="btn btn-danger btn-rounded">
+                    <a href="/inicio" className="btn btn-danger btn-rounded">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"

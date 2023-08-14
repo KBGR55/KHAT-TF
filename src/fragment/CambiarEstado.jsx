@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useForm } from 'react-hook-form';
-import { ActualizarPersona, ChanceEstado, GuardarPersona, Roles } from '../hooks/Conexion';
+import { Actualizar, ChanceEstado, GuardarPersona, Roles } from '../hooks/Conexion';
 import { useState } from 'react';
 import mensajes from '../utilidades/Mensajes';
 import { borrarSesion, getToken } from '../utilidades/Sessionutil';
@@ -9,8 +9,6 @@ import { useNavigate } from 'react-router-dom';
 const CambiarEstado = ({ personaObtenida, handleChange }) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navegation = useNavigate();
-
-    console.log("ASH", personaObtenida);
 
     const editar = async () => {
 
@@ -46,7 +44,7 @@ const CambiarEstado = ({ personaObtenida, handleChange }) => {
                     <div className="col-12">
                         <div className="card">
                             <div className="card-body">
-                                <h4 className="card-title">Editar datos del estudiante</h4>
+                                <h4 className="card-title">Editar datos</h4>
                                 <form className="form-sample" onSubmit={handleSubmit(() => editar())}>
                                     <p className="card-description">Datos personales</p>
                                     <div className="row">
@@ -72,7 +70,7 @@ const CambiarEstado = ({ personaObtenida, handleChange }) => {
 
                                     </div>
                                     <div className="d-flex justify-content-between">
-                                        <a href="/paginaPincipal/listarAlumnos" className="btn btn-danger btn-rounded">
+                                        <a href="/inicio" className="btn btn-danger btn-rounded">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="16"

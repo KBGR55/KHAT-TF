@@ -1,36 +1,48 @@
 import './App.css';
-import Login from './fragment/Login';
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
-import PresentarEstudiantes from './fragment/PresentarEstudiantes';
-import Actividaes from './fragment/Actividades';
-import PaginaPrincipal from './fragment/PaginaPrincipal ';
-import PaginaPincipalAdmin from './fragment/PaginaPincipalAdmin';
+
+import { Navigate, Route, Routes} from 'react-router-dom';
 import ListarPersonas from './fragment/ListarPersonas';
-import EditarPersona from './fragment/EditarPersona';
-import CambiarEstado from './fragment/CambiarEstado';
-import ListarMatriculas from './fragment/ListarMatriculas';
-import { ListarPracticas } from './fragment/ListarPracticas';
-import Actualizar from './fragment/Actualizar'
-
-
+import { estaSesion, getRol } from './utilidades/Sessionutil';
+import Login from './fragment/Login';
+import PaginaPrincipal from './fragment/PaginaPrincipal ';
+import ActualizarVentanaPersonas from './fragment/ActualizarVentanaPersonas';
+import Laboratorio from './fragment/Laboratorio';
+import AsignarDocente from './fragment/AsignarDocente';
+import AsignarMatricula from './fragment/AsignarMatricula';
+import ListaParticipantes from './fragment/ListaParticipantes';
+import ListaPracticas from './fragment/ListaPracticas';
+import ListarEntregas from './fragment/ListarEntregas';
 function App() {
+  const MiddewareSesion = ({ children }) => {
+    const autenticado = estaSesion();
+    if (autenticado) {
+      return children
+    } else {
+      return <Navigate to='/' />;
+    }
+  }
+
+  const MiddewareRol = ({ children}) => {
+    const rol = getRol();
+    if (rol === "ADMINISTRADOR") {
+      return children
+    }else{
+      return <Navigate to= "/"/>
+    }
+  }
+
   return (
     <Routes>
-      <Route path='/' element={<Login />} />
-      <Route path='/inicio' element={<PaginaPrincipal />} />
-      <Route path='/inicio/listarActividades' element={<Actividaes />} />
-      <Route path='/paginaPrincipal' element={<PaginaPincipalAdmin/>} />
-      <Route path='/paginaPrincipal/listarAlumnos' element={<PresentarEstudiantes />} />     
-      <Route path='/practicas' element={<ListarPracticas/>} />
-       
-      
-      <Route path='/paginaPrincipal/listarregistros' element={<ListarPersonas />} />
-      <Route path='/registros/edicion' element={<EditarPersona/>}/>
-      <Route path='/registros/cambioestado' element={<CambiarEstado/>}/>
-      <Route path='/registros/listamatriculas' element={<ListarMatriculas/>}/>
-      <Route path='/act' element={<Actualizar />} /> 
-      
-
+     <Route path='/' element={<Login/>} />
+     <Route path='/inicio' element={<MiddewareSesion><PaginaPrincipal /></MiddewareSesion>} />
+      <Route path='/act' element={<ActualizarVentanaPersonas/>} /> 
+      <Route path ='/admin/usuarios' element= {<MiddewareRol><MiddewareSesion><ListarPersonas/></MiddewareSesion></MiddewareRol>} />
+      <Route path='/estudiantes/laboratorio'element={<Laboratorio/>} />
+      <Route path='/estudiantes/practica/:id'element={<ListaPracticas/>} />
+      <Route path='/admin/docentes'element={<AsignarDocente/>} />
+      <Route path='/admin/matricular'element={<AsignarMatricula/>} />
+      <Route path="/docente/participantes/:id"element={<ListaParticipantes/>} />
+      <Route path="/docente/participantes/entrega/:id"element={<ListarEntregas/>} />
     </Routes>
   );
 }

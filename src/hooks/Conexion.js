@@ -1,272 +1,195 @@
-const URLN = "http://localhost:3006/api"
+const URLN = "http://localhost:5006/api"
+export const URLBASE = "http://localhost:5006"; 
 export const InicioSesion = async (data) => {
-    const cabeceras = {
-        "Accept": 'aplication/json',
+    const headers = {
+        "Accept": 'application/json',
         "Content-Type": 'application/json'
     };
-    const datos = await (await fetch(URLN + "/sesion", {
+    const datos = await (await fetch(URLN + "/login", {
         method: "POST",
-        headers: cabeceras,
+        headers: headers,
         body: JSON.stringify(data)
     })).json();
     return datos;
 }
-
-//-----LISTAR
-export const Roles = async (key) => {
-    const cabeceras = { "X-API-TOKEN": key };
-    const datos = await (await fetch(URLN + "/roles", {
-        method: "GET",
-        headers: cabeceras
-    })).json();
-    return datos;
-}
-
-export const Periodo = async (key) => {
-    const cabeceras = { "X-API-TOKEN": key };
-    const datos = await (await fetch(URLN + "/periodo/listar", {
-        method: "GET",
-        headers: cabeceras
-    })).json();
-    return datos;
-}
-
-export const Matricula = async (key) => {
-    const cabeceras = { "X-API-TOKEN": key };
-    const datos = await (await fetch(URLN + "/matriculas/listar", {
-        method: "GET",
-        headers: cabeceras
-    })).json();
-    console.log("datos", datos);
-    return datos;
-}
-
-export const Personas = async (key) => {
-    const cabeceras = {
-        "X-API-TOKEN": key
-    };
-    const datos = await (await fetch(URLN + "/personas", {
-        method: "GET",
-        headers: cabeceras
-    })).json();
-    return datos;
-}
-
-export const Asignatura = async (key) => {
-    const cabeceras = {
-        "X-API-TOKEN": key
-    };
-    const datos = await (await fetch(URLN + "/asignatura/listar", {
-        method: "GET",
-        headers: cabeceras
-    })).json();
-    return datos;
-}
-export const ListadoRegistros = async (key) => {
-    const cabeceras = {
-        "X-API-TOKEN": key
-    };
-    const datos = await (await fetch(URLN + "/listadoregistro", {
-        method: "GET",
-        headers: cabeceras
-    })).json();
-    console.log("DATOS QUE VIENEN", datos);
-    return datos;
-}
-
-export const ListadoPracticas = async (key) => {
-    const cabeceras = {
-        "X-API-TOKEN": key
-    };
-    const datos = await (await fetch(URLN + "/practica/listar", {
-        method: "GET",
-        headers: cabeceras
-    })).json();
-    console.log("DATOS QUE VIENEN", datos);
-    return datos;
-}
-
-//-----GUARDAR
-
-export const GuardarPersona = async (data, key) => {
+export const Listar = async (key, urls) => {
     const headers = {
         "Content-Type": "application/json",
         "X-API-TOKEN": key
     };
-    const datos = await (await fetch(URLN + "/personas/guardar", {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(data)
-    })).json();
-    console.log("DATOS A GUARDAR", datos);
-    return datos;
-}
-
-export const GuardarPeriodo = async (data, key) => {
-    const headers = {
-        "Content-Type": "application/json",
-        "X-API-TOKEN": key
-    };
-    const datos = await (await fetch(URLN + "/periodo/guardar", {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(data)
-    })).json();
-    return datos;
-}
-
-export const GuardarMatricula = async (data, key) => {
-    const headers = {
-        "Content-Type": "application/json",
-        "X-API-TOKEN": key
-    };
-    const datos = await (await fetch(URLN + "/matriculas/guardar", {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(data)
-    })).json();
-    console.log("DATOS QUE MANDA", datos);
-    return datos;
-}
-
-export const GuardarPractica = async (data, key) => {
-    const headers = {
-        "Content-Type": "application/json",
-        "X-API-TOKEN": key
-    };
-    const datos = await (await fetch(URLN + "/practica/guardar", {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(data)
-    })).json();
-    console.log("DATOS QUE MANDA", datos);
-    return datos;
-}
-//-------ACTUALIZAR
-export const ActualizarPersona = async (data, key) => {
-    const headers = {
-        "Content-Type": "application/json",
-        "X-API-TOKEN": key
-    };
-    const datos = await (await fetch(URLN + "/personas/modificar", {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(data)
-    })).json();
-    return datos;
-}
-
-export const ActualizarPractica = async (data, key) => {
-    const headers = {
-        "Accept": 'aplication/json',
-        "Content-Type": 'application/json',
-        "X-API-TOKEN": key
-    };
-    const datos = await (await fetch(URLN + "/practicas/modificar", {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(data)
-    })).json();
-    return datos;
-}
-
-export const ChanceEstado = async (data, key) => {
-    const headers = {
-        "Content-Type": "application/json",
-        "X-API-TOKEN": key
-    };
-    const datos = await (await fetch(URLN + "/personas/cambiarEstado", {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(data)
-    })).json();
-    return datos;
-}
-export const ChanceEstadoPractica = async (data, key) => {
-    const headers = {
-        "Accept": 'aplication/json',
-        "Content-Type": 'application/json',
-        "X-API-TOKEN": key
-    };
-    const datos = await (await fetch(URLN + "/practicas/cambiarEstado", {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(data)
-    })).json();
-    return datos;
-}
-
-export const ActualizarPeriodo = async (data, key) => {
-    const headers = {
-        "Content-Type": "application/json",
-        "X-API-TOKEN": key
-    };
-    const datos = await (await fetch(URLN + "/periodo/modificar", {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(data)
-    })).json();
-    return datos;
-}
-
-export const ActualizarMatricula = async (data, key) => {
-    const headers = {
-        "Content-Type": "application/json",
-        "X-API-TOKEN": key
-    };
-    const datos = await (await fetch(URLN + "/matriculas/modificar", {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(data)
-    })).json();
-    return datos;
-}
-
-//------OBTENER UN DATO
-
-export const ObtenerPersona = async (id, key) => {
-    console.log("aqui");
-    var cabeceras = { "X-API-TOKEN": key };
-    const datos = await (await fetch(`${URLN}/personas/obtener/${id}`, {
+    const datos = await (await fetch(`${URLN}/${urls}`, {
         method: "GET",
-        headers: cabeceras
+        headers: headers,
     })).json();
-    console.log("TRAE", datos);
     return datos;
 }
-export const ObtenerPractica = async (id, key) => {
-    var cabeceras = { "X-API-TOKEN": key };
-    const datos = await (await fetch(`${URLN}/practicas/obtener/${id}`, {
+export const Obtener = async (key, urls) => {
+    const headers = {
+        "Content-Type": "application/json",
+        "X-API-TOKEN": key,
+    };
+    const datos = await (await fetch(`${URLN}/${urls}`, {
         method: "GET",
-        headers: cabeceras
+        headers: headers,
     })).json();
-    console.log("TRAE", datos);
     return datos;
 }
+export const obtener = async (id, key, obj) => {
+    const headers = {
+        "Content-Type": "application/json",
+        "X-API-TOKEN": key
+    };
+    const datos = await (await fetch(`${URLN}/${obj}/obtener/${id}`, {
+        method: "GET",
+        headers: headers
+    })).json();
+    return datos;
+}
+export const Guardar = async (data, key, urls) => {
+    const headers = {
+        "Content-Type": "application/json",
+        "X-API-TOKEN": key
+    };
+    const datos = await (await fetch(`${URLN}/${urls}`, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(data),
+    })).json();
+    return datos;
+}
+export const GuardarDocumentos = async (data, key) => {
+    console.log('llega');
+    console.log(data);
+    const headers = {
+        "x-api-token": key,
+    };
+    const requestOptions = {
+        method: "POST",
+        headers: headers,
+        body: data, // Envía el FormData directamente como cuerpo
+    };
+    try {
+        const response = await fetch(URLN + '/guardar/practica', requestOptions);
 
-export const ObtenerPeriodo = async (id, key) => {
-    var cabeceras = { "X-API-TOKEN": key };
-    const datos = await (await fetch(`${URLN}/periodo/obtener/${id}`, {
-        method: "GET",
-        headers: cabeceras
+        const datos = await response.json();
+
+        return datos;
+    } catch (error) {
+        console.log("Error:", error);
+        throw error;
+    }
+}
+export const GuardarDocumentosEntrega = async (data, key) => {
+    console.log('llega');
+    console.log(data);
+    const headers = {
+        "x-api-token": key,
+    };
+    const requestOptions = {
+        method: "POST",
+        headers: headers,
+        body: data, // Envía el FormData directamente como cuerpo
+    };
+    try {
+        const response = await fetch(URLN + '/entregar/practica', requestOptions);
+
+        const datos = await response.json();
+
+        return datos;
+    } catch (error) {
+        console.log("Error:", error);
+        throw error;
+    }
+}
+export const GuardarImages = async (data, key, urls) => {
+    console.log('llega');
+    console.log(data);
+    const headers = {
+        "x-api-token": key,
+    };
+    const requestOptions = {
+        method: "POST",
+        headers: headers,
+        body: data, // Envía el FormData directamente como cuerpo
+    };
+    try {
+        const response = await fetch(URLN + urls, requestOptions);
+
+        const datos = await response.json();
+
+        return datos;
+    } catch (error) {
+        console.log("Error:", error);
+        throw error;
+    }
+}
+export const ActualizarImagenes = async (data, key, urls) => {
+    console.log('llega');
+    console.log(data);
+    const headers = {
+        "x-api-token": key,
+    };
+    const requestOptions = {
+        method: "PUT",
+        headers: headers,
+        body: data, // Envía el FormData directamente como cuerpo
+    };
+    try {
+        const response = await fetch(URLN + urls, requestOptions);
+
+        const datos = await response.json();
+
+        return datos;
+    } catch (error) {
+        console.log("Error:", error);
+        throw error;
+    }
+}
+export const Actualizar = async (data, key, urls) => {
+    const headers = {
+        "Content-Type": "application/json",
+        "X-API-TOKEN": key
+    };
+    const datos = await (await fetch(URLN + "/" + urls, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(data),
+    })).json();
+    console.log(datos);
+    return datos;
+}
+export const Eliminar = async (data, key, urls) => {
+    const headers = {
+        "Content-Type": "application/json",
+        "X-API-TOKEN": key
+    };
+    const datos = await (await fetch(URLN + "/" + urls, {
+        method: "DELETE",
+        headers: headers,
+        body: JSON.stringify(data)
     })).json();
     return datos;
 }
-
-export const ObtenerMatricula = async (id, key) => {
-    var cabeceras = { "X-API-TOKEN": key };
-    const datos = await (await fetch(`${URLN}/matriculas/obtener/${id}`, {
-        method: "GET",
-        headers: cabeceras
+export const ChanceEstado= async (data, key,urls) => {
+    const headers = {
+        "Content-Type": "application/json",
+        "X-API-TOKEN": key
+    };
+    const datos = await (await fetch(URLN + "/" + urls, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(data)
     })).json();
     return datos;
 }
-
-export const ObtenerAsignatura = async (id, key) => {
-    var cabeceras = { "X-API-TOKEN": key };
-    const datos = await (await fetch(`${URLN}/asignatura/obtener/${id}`, {
+export const ObtenerLaboratorio = async (key,data) => {
+    var cabecera = {
+        "Content-Type": "application/json",
+        "X-API-TOKEN": key
+    }
+    const datos = await (await fetch(URLN+'/peticion/codigo/' + data,  {
         method: "GET",
-        headers: cabeceras
+        headers: cabecera
     })).json();
     return datos;
 }
