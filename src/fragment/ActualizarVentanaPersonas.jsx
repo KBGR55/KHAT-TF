@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
 
-function Actualizar() {
+function ActualizarVentanaPersonas() {
   const navegation = useNavigate();
   useEffect(() => {
     navegation("/inicio");
   }, []);
 }
-export default Actualizar;
+export default ActualizarVentanaPersonas;
