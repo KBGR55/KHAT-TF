@@ -32,7 +32,7 @@ Una vez que todas las dependencias se hayan instalado correctamente, puedes inic
 npm start
 ```
 
-Este comando iniciará el servidor de desarrollo y abrirá la aplicación en tu navegador predeterminado. Si no se abre automáticamente, puedes acceder a la aplicación abriendo tu navegador web y navegando a `http://localhost:3000`.
+Este comando iniciará el servidor de desarrollo y abrirá la aplicación en tu navegador predeterminado. Si no se abre automáticamente, puedes acceder a la aplicación abriendo tu navegador web y navegando a `http://localhost:3001`.
 
 ¡Y eso es todo! Ahora deberías tener el frontend de KHAT-TF funcionando localmente en tu máquina. Si tienes alguna pregunta o encuentras algún problema, no dudes en comunicarte con el equipo de desarrollo.
 
