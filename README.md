@@ -18,7 +18,7 @@ Es importante mencionar que para el correcto funcionamiento de esta aplicación 
 Una vez que hayas clonado el repositorio, navega al directorio del proyecto y ejecuta el siguiente comando para instalar todas las dependencias necesarias:
 
 ```bash
-cd KHAT-TF/frontend
+cd KHAT-TF
 npm install
 ```
 
