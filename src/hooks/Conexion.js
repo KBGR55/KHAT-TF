@@ -1,5 +1,5 @@
-const URLN = "http://localhost:5006/api"
-export const URLBASE = "http://localhost:5006"; 
+const URLN = "http://localhost:3000/api"
+export const URLBASE = "http://localhost:3000"; 
 export const InicioSesion = async (data) => {
     const headers = {
         "Accept": 'application/json',

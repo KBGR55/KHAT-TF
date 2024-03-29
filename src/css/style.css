@@ -1,0 +1,21 @@
+:root {
+    --azul: #0c2342;
+    --azul-secundario: #0d4f81;
+    --blanco: #FFF;
+    --gris: #eaeced;
+    --negro: #323232;
+    --naranja: #ffe6b1;
+    --naranja-oscuro: #f0ad4e;
+    --rojo: #de361c;
+    --verde: #36ab2b;
+    --azul-primario: #212a3e;
+}
+.texto-h1{
+    color: var(--blanco) !important;
+    font-weight: bold;
+}
+
+.azul-blanco {
+    background-color: var(--azul-primario);
+    color: var(--blanco) !important;
+}

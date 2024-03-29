@@ -1,101 +1,65 @@
-import React, { useEffect, useState } from 'react';
-import { Obtener } from '../hooks/Conexion';
-import { borrarSesion, getToken, getUser,getRol } from '../utilidades/Sessionutil';
-import mensajes from '../utilidades/Mensajes';
-import { useParams, useNavigate } from 'react-router-dom';
-function BarraNavegacion() {
+import React, { useState } from 'react';
+import { Navbar, Nav, Offcanvas } from 'react-bootstrap';
+import { borrarSesion, getRol, getToken } from '../utilidades/Sessionutil';
+import { useNavigate } from 'react-router-dom';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../css/style.css';
+
+const BarraMenu = () => {
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
+  return (
+    <Navbar expand="lg" variant="fondo" className="navbar navbar-expand-lg fixed-top azul-blanco" >
+      <div className='container-fluid'>
+        <Navbar.Brand className="navbar-brand texto-h1" href="/inicio">KHAT ACADEMIC</Navbar.Brand>
+        <Navbar className="navbar-toggler fas fa-bars azul-blanco" aria-controls="offcanvasNavbar" onClick={() => setShowOffcanvas(!showOffcanvas)} />
+        <div className="collapse navbar-collapse">
+          <NavLink classNameNav="navbar-nav ms-auto mb-2 mb-lg-0" />
+        </div>
+        <Offcanvas show={showOffcanvas} onHide={() => setShowOffcanvas(false)} placement="end" target="#offcanvasNavbar">
+          <Offcanvas.Header className="azul-blanco" style={{ color: '#fff' }} closeButton>
+            <Offcanvas.Title>OPCIONES</Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body className="offcanvas-body azul-blanco">
+            <NavLink classNameNav="navbar-nav justify-content-end flex-grow-1 pe-3" />
+          </Offcanvas.Body>
+        </Offcanvas>
+      </div>
+    </Navbar>
+  );
+};
+
+export default BarraMenu;
+
+const navLinkStyle = {
+  marginRight: '10px',
+  color: '#fff'
+};
+
+
+const NavLink = ({ classNameNav }) => {
   const navigate = useNavigate();
-  const [llasignaturas, setLlasignaturas] = useState(false);//para listar asignaturas
-  const [asignaturas, setasignaturas] = useState([]);//para listar asignaturas
-  if (!llasignaturas) {
-    setasignaturas(getUser());
-    setLlasignaturas(true);
-  }
+  const [showDropdown, setShowDropdown] = useState(false);
+  const token = getToken();
+
   const handleCerrarSesion = () => {
-    borrarSesion(); // Llama al método para cerrar sesión
-    navigate('/'); // Redirige a la página de inicio después de cerrar sesión
+    borrarSesion();
+    navigate('/');
   };
 
-  useEffect(() => {
-    setLlasignaturas(false);
-  }, []);
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
+
   return (
-    <nav className="navbar navbar-light fixed-top" style={{ background: "#212A3E" }}>
-      <div className="container-fluid" style={{ background: "#212A3E" }}>
-        <a className="navbar-brand" style={{ color: "#F1F6F9" }} href="#">{asignaturas.nombres + " " + asignaturas.apellidos}</a>
-        <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="#F1F6F9" class="bi bi-list-ul" viewBox="0 0 14 14">
-            <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
-          </svg>
-        </button>
-        <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" style={{ background: "#212A3E" }}>
-          <div className="offcanvas-header">
-            <h5 className="offcanvas-title" id="offcanvasNavbarLabel" ></h5>
-
-            <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          </div>
-          <div className="offcanvas-body" >
-            <ul className="navbar-nav justify-content-end flex-grow-1 pe-3" >
-              <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/inicio" style={{ color: '#F1F6F9' }}>Inicio</a>
-              </li>
-               {/**ESTUDIANTE*/}
-              {getRol() === "ESTUDIANTE" && (
-                <>
-                    <li className="nav-item">
-                <a className="nav-link" href="/estudiantes/laboratorio" style={{ color: '#F1F6F9' }}>Laboratorio remoto</a>
-              </li>
-                </>
-              )}
-
-              {/**ADMINISTRADOR*/}
-
-              {getRol() === "ADMINISTRADOR" && (
-                <>
-                 <li className="nav-item">
-                <a className="nav-link" href="/admin/usuarios" style={{ color: '#F1F6F9' }}>Registrar usuario</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/admin/matricular" style={{ color: '#F1F6F9' }}>Matricular</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/admin/docentes" style={{ color: '#F1F6F9' }}>Asignar docente</a>
-              </li>
-                </>
-              )}
-                {/**DOECNTE
-
-              {getRol() === "DOCENTE" && (
-                <>
-                 <li className="nav-item">
-                <a className="nav-link" href="/docente/entregas" style={{ color: '#F1F6F9' }}>Entregas</a>
-              </li>
-                </>
-              )}*/}
-
-              
-              <li className="nav-item">
-                <a className="nav-link" href="#" onClick={handleCerrarSesion} style={{ color: '#F1F6F9' }}>Cerrar sesion</a>
-              </li>
-              { /*<li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ color: '#F1F6F9' }}>
-                  Dropdown
-                </a>
-                <ul className="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown" style={{ background: "#212A3E" }}>
-                  <li><a className="dropdown-item" style={{ color: '#F1F6F9' }} href="#">Acción</a></li>
-                  <li><a className="dropdown-item"  style={{ color: '#F1F6F9' }} href="#">Otra acción</a></li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li><a className="dropdown-item" style={{ color: '#F1F6F9' }} href="#">Algo más aquí</a></li>
-                </ul>
-  </li>*/}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </nav>
+    <Nav className={classNameNav}>
+      <Nav.Link href="/inicio" style={navLinkStyle}><i className="fas fa-home"></i> Inicio</Nav.Link>
+      {getRol() === 'ADMINISTRADOR' && <Nav.Link href="/admin/usuarios" style={navLinkStyle}><i className="fas fa-user-plus"></i> Registrar usuario</Nav.Link>}
+      {getRol() === 'ADMINISTRADOR' && <Nav.Link href="/admin/matricular" style={navLinkStyle}><i className="fas fa-user-graduate"></i> Matricular</Nav.Link>}
+      {getRol() === 'ADMINISTRADOR' && <Nav.Link href="/admin/docentes" style={navLinkStyle}><i className="fas fa-chalkboard-teacher"></i> Asignar docente</Nav.Link>}
+      {getRol() === 'ESTUDIANTE' && <Nav.Link href="/estudiantes/laboratorio" style={navLinkStyle}><i className="fas fa-terminal"></i> Laboratorio remoto</Nav.Link>}
+      {token && <Nav.Link href="/" onClick={handleCerrarSesion} style={navLinkStyle}><i className="fas fa-sign-out-alt"></i> Cerrar sesión</Nav.Link>}
+    </Nav>
   );
-}
-
-export default BarraNavegacion;
+};
