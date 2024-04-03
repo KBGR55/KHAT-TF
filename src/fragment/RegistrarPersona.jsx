@@ -2,17 +2,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import { Guardar, GuardarDocumentos, GuardarImages, Listar } from '../hooks/Conexion';
+import {GuardarImages, Listar } from '../hooks/Conexion';
 import mensajes from '../utilidades/Mensajes';
 import { borrarSesion, getToken } from '../utilidades/Sessionutil';
 
 const RegistrarPersona = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navegation = useNavigate();
-
-    const [file, setFile] = useState(null);
-
     const [rolSeleccionado, setRolSeleccionado] = useState([]);
     const [llRoles, setLlRoles] = useState(false);
     const [roles, setRoles] = useState([]);

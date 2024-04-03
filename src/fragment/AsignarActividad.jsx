@@ -1,26 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import mensajes from '../utilidades/Mensajes';
 import { borrarSesion, getToken } from '../utilidades/Sessionutil';
-import { Guardar, GuardarDocumentos, Obtener } from '../hooks/Conexion';
+import { GuardarDocumentos } from '../hooks/Conexion';
 
 function AsignarActividad({ parametroLista }) {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const navegation = useNavigate();
-  const { watch, setValue } = useForm();//para listar asignaturas
-  //para el documento
-  const [file, setFile] = useState(null);
 
-  const onSubmit = async(data) => {
+  const onSubmit = async (data) => {
     for (const cursas of parametroLista) {
       var formData = new FormData();
       formData.append('nombre', data.tema);
       formData.append('fecha_habilitada', data.fecha_habilitada);
       formData.append('fecha_entrega', data.fecha_entrega);
-      formData.append('file',data.documento[0]); // Agregar el archivo a FormData
+      formData.append('file', data.documento[0]);
       formData.append('laboratorio', data.laboratorio);
-      formData.append('external_cursa', cursas.external_id);  
+      formData.append('external_cursa', cursas.external_id);
       console.log(cursas.external_id);
       console.log("DATOS ENVIADOS");
       console.log(formData);
@@ -32,7 +27,7 @@ function AsignarActividad({ parametroLista }) {
         } else {
           mensajes(cursaInfo.msg);
         }
-        
+
         if (cursaInfo.code !== 200) {
           mensajes(cursaInfo.msg);
         }
@@ -43,30 +38,21 @@ function AsignarActividad({ parametroLista }) {
     }
   };
 
-  useEffect(() => {
-    console.log(parametroLista);
-   // setLlasignaturas(false);
-  }, []);
   return (
     <div className="wrapper">
       <div className="d-flex flex-column">
         <div className="content">
-
           <div className='container-fluid'>
             <div className="col-lg-10">
               <div className="p-5">
-
                 <form className="user" onSubmit={handleSubmit(onSubmit)}>
-                  <div className="col-md-12" style={{ marginBottom: '10px' }}></div> {/* Espacio adicional */}
-                  {/** INGRESAR tema */}
+                  <div className="col-md-12" style={{ marginBottom: '10px' }}></div>
                   <div className="form-group">
                     <label>Nombre</label>
                     <input type="text" {...register('tema', { required: true })} className="form-control form-control-user" placeholder="Ingrese el título" />
                     {errors.tema && errors.tema.type === 'required' && <div className='alert alert-danger'>Ingrese el título</div>}
                   </div>
-                  <div className="col-md-12" style={{ marginBottom: '10px' }}></div> {/* Espacio adicional */}
-
-                  {/** INGRESAR Fecha entrega */}
+                  <div className="col-md-12" style={{ marginBottom: '10px' }}></div>
                   <div className="form-group">
                     <label>Fecha entrega habilitada</label>
 
@@ -74,17 +60,14 @@ function AsignarActividad({ parametroLista }) {
                       {...register('fecha_habilitada', { required: true })} />
                     {errors.fecha_habilitada && errors.fecha_habilitada.type === 'required' && (<div className='alert alert-danger'>Ingrese una fecha para habilitar la entrega</div>)}
                   </div>
-                  <div className="col-md-12" style={{ marginBottom: '10px' }}></div> {/* Espacio adicional */}
-                  {/** INGRESAR Fecha entrega */}
+                  <div className="col-md-12" style={{ marginBottom: '10px' }}></div>
                   <div className="form-group">
                     <label>Fecha de entrega</label>
                     <input type="datetime-local" className="form-control form-control-user" placeholder="Ingrese la fecha de entrega"
                       {...register('fecha_entrega', { required: true })} />
                     {errors.fecha_entrega && errors.fecha_entrega.type === 'required' && (<div className='alert alert-danger'>Ingrese una fecha de entrega</div>)}
                   </div>
-                  <div className="col-md-12" style={{ marginBottom: '10px' }}></div> {/* Espacio adicional */}
-
-                  {/**INGRESAR ARCHIVO */}
+                  <div className="col-md-12" style={{ marginBottom: '10px' }}></div>
                   <div className="col-md-12">
                     <div className="form-data">
                       <label>Selecciona un archivo PDF:</label>
@@ -93,19 +76,16 @@ function AsignarActividad({ parametroLista }) {
                         className="form-control"
                         accept=".pdf"
                         placeholder="Seleccionar un archivo"
-                        {...register('documento')} 
+                        {...register('documento')}
                       />
                     </div>
                   </div>
-                  <div className="col-md-12" style={{ marginBottom: '10px' }}></div> {/* Espacio adicional */}
-                  {/** Check para laboratorio */}
+                  <div className="col-md-12" style={{ marginBottom: '10px' }}></div>
                   <div className="form-check">
                     <input type="checkbox" className="form-check-input" id="laboratorio" {...register('laboratorio')} />
                     <label className="form-check-label" htmlFor="laboratorio">Laboratorio</label>
                   </div>
-                  <div className="col-md-12" style={{ marginBottom: '30px' }}></div> {/* Espacio adicional */}
-
-                  {/** BOTÓN CANCELAR */}
+                  <div className="col-md-12" style={{ marginBottom: '30px' }}></div>
                   <div style={{ display: 'flex', gap: '10px' }}>
                     <a href="/inicio" className="btn btn-danger btn-rounded">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
@@ -114,13 +94,9 @@ function AsignarActividad({ parametroLista }) {
                       </svg>
                       <span style={{ marginLeft: '5px' }}>Cancelar</span>
                     </a>
-
-                    {/** BOTÓN REGISTRAR */}
                     <input className="btn btn-success btn-rounded" type='submit' value='Asignar actividad' style={{ backgroundColor: '#212A3E', width: '100%' }}></input>
                   </div>
-
                 </form>
-
               </div>
             </div>
           </div>

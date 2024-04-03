@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 import { Guardar, Listar } from '../hooks/Conexion';
 import mensajes from '../utilidades/Mensajes';
 import { borrarSesion, getToken } from '../utilidades/Sessionutil';
@@ -9,9 +8,7 @@ import BarraNavegacion from './BarraNavegacion';
 
 const AsignarDocente = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const navegation = useNavigate();
   const [docentes, setDocenteSeleccionado] = useState([]);
-  const [llRoles, setLlRoles] = useState(false);
   const [asignaturas, setasignaturas] = useState([]);//para listar asignaturas
   const [llasignaturas, setLlasignaturas] = useState(false);//para listar asignaturas
   const { watch, setValue } = useForm();//para listar asignaturas
@@ -67,11 +64,6 @@ const AsignarDocente = () => {
         }
       }
     });
-    docentes.map((asignatura, index) => {
-      console.log(`Otras propiedades de la materia:`);
-      console.log(asignatura); // Puedes imprimir todas las propiedades de la materia aquí
-      console.log("----------------------");
-  });
   }
 
   useEffect(() => {

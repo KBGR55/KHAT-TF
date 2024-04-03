@@ -39,16 +39,11 @@ const navLinkStyle = {
 
 const NavLink = ({ classNameNav }) => {
   const navigate = useNavigate();
-  const [showDropdown, setShowDropdown] = useState(false);
   const token = getToken();
 
   const handleCerrarSesion = () => {
     borrarSesion();
     navigate('/');
-  };
-
-  const toggleDropdown = () => {
-    setShowDropdown(!showDropdown);
   };
 
 

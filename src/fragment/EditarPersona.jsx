@@ -31,7 +31,7 @@ const EditarPersona = ({ personaObtenida, handleChange }) => {
     }
 
     ActualizarImagenes(formData, getToken(), "/personas/actualizar").then((info) => {
-      if (info.code !== 200 || info.msg == "TOKEN NO VALIDO O EXPIRADO") {
+      if (info.code !== 200 || info.msg === "TOKEN NO VALIDO O EXPIRADO") {
         mensajes(info.msg, 'error', 'Error');
         borrarSesion();
       } else {

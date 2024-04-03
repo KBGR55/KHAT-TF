@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 import { Guardar, Listar, Obtener } from '../hooks/Conexion';
 import mensajes from '../utilidades/Mensajes';
-import { borrarSesion, getToken, getUser } from '../utilidades/Sessionutil';
+import { borrarSesion, getToken} from '../utilidades/Sessionutil';
 import BarraNavegacion from './BarraNavegacion';
 import 'mdb-ui-kit/css/mdb.min.css';
 import Button from 'react-bootstrap/Button'
 
 const AsignarMatricula = () => {
-  const { register, handleSubmit, formState: { errors }, watch, setValue, getValues } = useForm();
-  const navegation = useNavigate();
+  const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm();
   const [asignaturas, setasignaturas] = useState([]);//para listar asignaturas
   const [asignaturasEscogidas, setAsignaturasEscogidas] = useState([]);//para listar asignaturas escogidas
   const [llasignaturas, setLlasignaturas] = useState(false);//para listar asignaturas
@@ -21,7 +19,6 @@ const AsignarMatricula = () => {
 
 
   const onSubmit = async (data) => {
-    console.log("-----------------------------\n" + "MATRICULAR: ");
     var datosMatricula = {
       "external_persona": personaObtenida[0].persona.external_id,
       "external_periodo": periodo.external_id,

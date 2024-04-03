@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Guardar, Listar, Obtener, URLBASE } from '../hooks/Conexion';
 import mensajes from '../utilidades/Mensajes';
-import { borrarSesion, estaSesion, getToken, getUser } from '../utilidades/Sessionutil';
-import { Button, FormControl, Modal, InputGroup } from 'react-bootstrap';
+import { borrarSesion,getToken} from '../utilidades/Sessionutil';
+import { Button, Modal} from 'react-bootstrap';
 import BarraNavegacion from './BarraNavegacion';
 import SubirActividad from './SubirActividad';
 import '../css/styleNombre.css';
@@ -13,21 +13,20 @@ import ListaCalificacion from './ListaCalificacion';
 
 
 const ListaPracticas = () => {
-    const { id } = useParams(); // Obtener el valor del parámetro "id" de la URL
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { id } = useParams(); 
+    const { handleSubmit } = useForm();
     const navegation = useNavigate();
-    const [llasignaturas, setLlasignaturas] = useState(false);//para listar asignaturas
-    const { watch, setValue } = useForm();//para listar asignaturas
-    const [show, setShow] = useState(false);//Modal entrega
-    const handleClose = () => setShow(false);//Modal entrega
-    const handleShow = () => setShow(true);//Modal entrega
-    const [cursa, setCursa] = useState();//para cursa
-    const [docente, setDocente] = useState();//para docente
-    const [practica, setPractica] = useState([]);//para listar asignaturas
-    const [pracObt, setPracObt] = useState([]);//
-    const [show2, setShow2] = useState(false);//Modal entrega
-    const handleClose2 = () => setShow2(false);//Modal entrega
-    const handleShow2 = () => setShow2(true);//Modal entrega
+    const [llasignaturas, setLlasignaturas] = useState(false);
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const [cursa, setCursa] = useState();
+    const [docente, setDocente] = useState();
+    const [practica, setPractica] = useState([]);
+    const [pracObt, setPracObt] = useState([]);
+    const [show2, setShow2] = useState(false);
+    const handleClose2 = () => setShow2(false);
+    const handleShow2 = () => setShow2(true);
     const [pracObt2, setPracObt2] = useState([]);//
 
     const onSubmit = (data) => {
@@ -83,7 +82,7 @@ const ListaPracticas = () => {
             console.error("Error:", error);
         }
     }
-    //ACCION OBTENER DATOS DE UN INGRESO
+   
     const obtenerDatosIngreso = (id) => {
         setPracObt(id);
     };
@@ -100,11 +99,11 @@ const ListaPracticas = () => {
             <div className="col-md-12" style={{ maxWidth: '1200px' }}>
                 <div className="contenedor">
                     <div className="row">
-                        <div className="col-md-12" style={{ marginBottom: '70px' }}>{''}</div> {/* Espacio adicional */}
+                        <div className="col-md-12" style={{ marginBottom: '70px' }}>{''}</div> 
                         <div className="col-lg-12">
                             <div className="sidebar">
                                 <h1 className="display-4">{cursa}</h1>
-                                <div className="col-md-12" style={{ marginBottom: '50px' }}></div> {/* Espacio adicional */}
+                                <div className="col-md-12" style={{ marginBottom: '50px' }}></div> 
                                 <p className="lead">{docente} </p>
                             </div>
                         </div>
@@ -140,7 +139,6 @@ const ListaPracticas = () => {
                                                                             <a href={`${URLBASE}/archivos/practicas/${persona.enlace_archivo}`} target="_blank" rel="noopener noreferrer">
                                                                                 <Button
                                                                                     variant="btn btn-outline btn-rounded"
-                                                                                    // onClick={handleShow}
                                                                                     style={{
                                                                                         backgroundColor: '#9BA4B5',
                                                                                         borderColor: '#9BA4B5',
@@ -166,7 +164,7 @@ const ListaPracticas = () => {
                                                                                     borderColor: '#9BA4B5',
                                                                                     color: '#FFFFFF',
                                                                                 }}
-                                                                                disabled={!persona.estado} // Deshabilitar si persona.estado es falso
+                                                                                disabled={!persona.estado} 
                                                                             >
 
                                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-journal-arrow-up" viewBox="0 0 16 16">
@@ -234,7 +232,6 @@ const ListaPracticas = () => {
                             </Modal.Footer>
                         </Modal>
                     </div>
-                     {/* <!--- Model Box 2 ---> */}
                      <div className="model_box">
                         <Modal
                             show={show2}

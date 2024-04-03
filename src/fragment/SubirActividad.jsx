@@ -1,20 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import mensajes from '../utilidades/Mensajes';
 import { borrarSesion, getToken } from '../utilidades/Sessionutil';
-import { Guardar, GuardarDocumentos, GuardarDocumentosEntrega, Obtener } from '../hooks/Conexion';
+import { GuardarDocumentosEntrega } from '../hooks/Conexion';
 
-function SubirActividad({ parametro}) {
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const navegation = useNavigate();
-    const { watch, setValue } = useForm();//para listar asignaturas
+function SubirActividad({ parametro }) {
+    const { register, handleSubmit } = useForm();
 
-    //para el documento
-    const [file, setFile] = useState(null);
-    const selectedHandler = e => {
-        setFile(e.target.files[0])
-    }
     const onSubmit = async (data) => {
         var formData = new FormData();
         formData.append('external_practica', parametro);
@@ -41,8 +33,8 @@ function SubirActividad({ parametro}) {
 
     useEffect(() => {
         console.log(parametro);
-        // setLlasignaturas(false);
-    }, []);
+    }, [parametro]);
+    
     return (
         <div className="wrapper">
             <div className="d-flex flex-column">

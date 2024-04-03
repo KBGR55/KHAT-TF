@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useForm } from 'react-hook-form';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Actualizar, Guardar, Listar, Obtener, URLBASE } from '../hooks/Conexion';
+import { useParams } from 'react-router-dom';
+import {  Listar,URLBASE } from '../hooks/Conexion';
 import mensajes from '../utilidades/Mensajes';
-import { borrarSesion, getToken, getUser } from '../utilidades/Sessionutil';
+import { borrarSesion, getToken} from '../utilidades/Sessionutil';
 import BarraNavegacion from './BarraNavegacion';
-import { Button, FormControl, Modal, InputGroup } from 'react-bootstrap';
-import AsignarActividad from './AsignarActividad';
+import { Button, Modal } from 'react-bootstrap';
 import '../css/styleNombre.css';
 import Calificar from './Calificar';
 const ListarEntregas = () => {
@@ -15,10 +13,7 @@ const ListarEntregas = () => {
     const [show, setShow] = useState(false);//Modal actividad
     const handleClose = () => setShow(false);//Modal actividad
     const handleShow = () => setShow(true);//Modal actividad
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const navegation = useNavigate();
     const [llasignaturas, setLlasignaturas] = useState(false);//para listar asignaturas
-    const { watch, setValue } = useForm();//para listar asignaturas
     const [participantes, setParticipantes] = useState([]);//para listar asignaturas
     const [pracObt, setPracObt] = useState([]);//
 

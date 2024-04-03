@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { Guardar, Listar, Obtener, URLBASE } from '../hooks/Conexion';
+import {Obtener, URLBASE } from '../hooks/Conexion';
 import mensajes from '../utilidades/Mensajes';
-import { borrarSesion, getToken, getUser } from '../utilidades/Sessionutil';
-import BarraNavegacion from './BarraNavegacion';
+import { borrarSesion, getToken} from '../utilidades/Sessionutil';
 import 'mdb-ui-kit/css/mdb.min.css';
 import Button from 'react-bootstrap/Button'
 
 const ListaCalificacion = ({ parametro }) => {
-  const { register, handleSubmit, formState: { errors }, watch, setValue, getValues } = useForm();
-  const navegation = useNavigate();
   const [llasignaturas, setLlasignaturas] = useState(false);//para listar asignaturas
   const [personaObtenida, setPersonaObtenida] = useState([]);//para estudiante datos tabla
   if (!llasignaturas) {

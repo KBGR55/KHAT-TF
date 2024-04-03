@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useForm } from 'react-hook-form';
-import { InicioSesion, obtener } from '../hooks/Conexion'
+import { InicioSesion } from '../hooks/Conexion'
 import { getToken, saveRol, saveToken, saveUser } from '../utilidades/Sessionutil';
 import { useNavigate } from 'react-router';
 import mensajes from '../utilidades/Mensajes';
@@ -8,7 +8,6 @@ import logo from '../logo.jpg';
 
 const Login = () => {
     const navegation = useNavigate();
-    // const { register, handleSubmit, formState: { errors } } = useForm();
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
 
     const onSubmit = (data) => {

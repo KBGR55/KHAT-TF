@@ -10,9 +10,9 @@ export const borrarSesion=()=>{
     localStorage.clear();
 }
 
-export const estaSesion =()=>{
+export const estaSesion = () => {
     var token = localStorage.getItem('token');
-    return (token && (token != 'undefined' || token!=null || token!='null'));
+    return (token && (token !== 'undefined' && token !== null && token !== 'null'));
 }
 
 export const saveRol = (rol) => {

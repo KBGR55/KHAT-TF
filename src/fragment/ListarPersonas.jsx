@@ -2,7 +2,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Modal, FormControl, InputGroup } from 'react-bootstrap';
 import React, { useState } from 'react';
 import { useNavigate } from "react-router";
-
 import mensajes from '../utilidades/Mensajes';
 import { getToken, borrarSesion } from '../utilidades/Sessionutil';
 import { Listar, obtener, URLBASE } from "../hooks/Conexion";
@@ -11,7 +10,6 @@ import RegistrarPersona from "./RegistrarPersona";
 import BarraNavegacion from "./BarraNavegacion";
 
 export const ListarPersonas = () => {
-
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -19,15 +17,10 @@ export const ListarPersonas = () => {
     const [tablaListarPersonas, setTablaListarPersonas] = useState([]);
     const navegation = useNavigate();
     const [llPersonas, setLlṔersonas] = useState(false);
-
     const [personaObtenida, setpersonaObtenida] = useState([]);
-
-    //SHOW EDITAR
     const [showEdit, setShowEdit] = useState(false);
     const handleShowEdit = () => setShowEdit(true);
     const handleCloseEdit = () => setShowEdit(false);
-
-    const [busqueda, setBusqueda] = useState("");
 
     if (!llPersonas) {
         console.log(getToken());
@@ -55,7 +48,6 @@ export const ListarPersonas = () => {
     }
 
     const handleSearch = e => {
-        setBusqueda(e.target.value);
         filtrar(e.target.value);
     }
 
