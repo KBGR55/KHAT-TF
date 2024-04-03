@@ -139,7 +139,6 @@ const ListarEntregas = () => {
                     </div>
                 </div>
 
-                {/* <!--- Model Box ---> */}
                 <div className="model_box">
                     <Modal
                         show={show}
@@ -149,7 +148,7 @@ const ListarEntregas = () => {
                         keyboard={false}
                     >
                         <Modal.Header closeButton>
-                            <Modal.Title>Agregar actividad</Modal.Title>
+                            <Modal.Title>Agregar calificación</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <Calificar parametro={pracObt} ></Calificar>

@@ -7,18 +7,16 @@ import Footer from "./Footer";
 import SubirActividad from "./SubirActividad";
 const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data, null, 2)}</pre>;
 const Actividaes = () => {
-
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [data, setData] = useState([]);
     const navegation = useNavigate();
     const [llActivity, setLlActivity] = useState(false);
-    const [searchValue, setSearchValue] = useState('');//PARA LA BUSQUEDA POR ID
-    const [selectedId, setSelectedId] = useState(null);//PARA SACAR EL ID DE LA TABLA
-    const handleSearchChange = (event) => { setSearchValue(event.target.value); };//PARA LA BUSQUEDA POR ID
+    const [searchValue, setSearchValue] = useState('');
+    const [selectedId, setSelectedId] = useState(null);
+    const handleSearchChange = (event) => { setSearchValue(event.target.value); };
 
-    //COLUMNAS DE LA TABLA
     const columns = [
         {
             name: 'titulo',
@@ -82,8 +80,6 @@ const Actividaes = () => {
                 </div>
 
                 <Footer></Footer>
-
-                {/* <!--- Model Box ---> */}
                 <div className="model_box">
                     <Modal
                         show={show}

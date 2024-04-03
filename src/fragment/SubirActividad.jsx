@@ -83,7 +83,7 @@ function SubirActividad({ parametro }) {
                                         </a>
 
                                         {/** BOTÓN REGISTRAR */}
-                                        <input className="btn btn-success btn-rounded" type='submit' value='Asignar actividad' style={{ backgroundColor: '#212A3E', width: '100%' }}></input>
+                                        <input className="btn btn-success btn-rounded" type='submit' value='Entregar actividad' style={{ backgroundColor: '#212A3E', width: '100%' }}></input>
                                     </div>
 
                                 </form>

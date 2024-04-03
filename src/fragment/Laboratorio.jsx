@@ -12,7 +12,6 @@ import BarraNavegacion from './BarraNavegacion';
 function Laboratorio() {
     const [code, setCode] = useState('');
     const [output, setOutput] = useState('');
-    // Función para convertir datos texto a hexadecimal
     function textToHex(text) {
         let hex = '';
         for (let i = 0; i < text.length; i++) {
@@ -39,17 +38,14 @@ function Laboratorio() {
             setOutput('Error al obtener información');
         }
     };
-    //Borrar el comando
     const clearCode = () => {
         setCode('');
     };
-    //Para que el input funcione con Enter
     const handleInputKeyPress = (e) => {
         if (e.key === 'Enter') {
             executeCode();
         }
     };
-
     return (
         <div id="root"  className=" d-flex justify-content-center align-items-center vh-100">
         <BarraNavegacion></BarraNavegacion>
@@ -102,7 +98,7 @@ function Laboratorio() {
                 </div>
             </div>
         </div>
-        </div>
+        </div>   
     );
 }
 

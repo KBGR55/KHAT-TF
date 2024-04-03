@@ -5,10 +5,9 @@ import { borrarSesion, getToken } from '../utilidades/Sessionutil';
 import React, { useState } from 'react';
 import { useNavigate } from "react-router";
 import Footer from "./Footer";
-import EditarPersona from "./EditarPersona";
 import AsignarActividad from "./AsignarActividad";
 import { ListadoPracticas, ObtenerAsignatura, ObtenerPractica, ChanceEstadoPractica } from "../hooks/Conexion";
-import { Link, unstable_HistoryRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import EditarPractica from "./EditarPractica";
 
 export const ListarPracticas = () => {
@@ -68,7 +67,7 @@ export const ListarPracticas = () => {
             }
         })
     };
-    //ACCION OBTENER DATOS DE UNA PRACTICA
+
     const obtenerId = (id) => {
         console.log(id);
         ObtenerPractica(id, getToken()).then((info) => {
@@ -81,10 +80,9 @@ export const ListarPracticas = () => {
         })
     };
 
-    //CAMBIAR FORMATO FECHA
     const obtenerFechaFormateada = (fechaString) => {
         const fecha = new Date(fechaString);
-        fecha.setDate(fecha.getDate() + 1); // Ajustar la fecha sumando 1 día
+        fecha.setDate(fecha.getDate() + 1); 
         const year = fecha.getFullYear();
         const month = ('0' + (fecha.getMonth() + 1)).slice(-2);
         const day = ('0' + fecha.getDate()).slice(-2);
@@ -176,7 +174,6 @@ export const ListarPracticas = () => {
                 </div>
 
                 <Footer />
-                {/* VENTANA MODAL AGREGAR */}
                 <div className="model_box">
                     <Modal
                         show={show}
