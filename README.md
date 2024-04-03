@@ -35,37 +35,44 @@ npm start
 
 Este comando iniciará el servidor de desarrollo y abrirá la aplicación en tu navegador predeterminado. Si no se abre automáticamente, puedes acceder a la aplicación abriendo tu navegador web y navegando a `http://localhost:3001`.
 
-¡Y eso es todo! Ahora deberías tener el frontend de KHAT-TF funcionando localmente en tu máquina. Si tienes alguna pregunta o encuentras algún problema, no dudes en comunicarte con el equipo de desarrollo.
-
-## Vistas
+## Vistas 
 
 Aquí se muestran algunas vistas principales de la aplicación:
 
 ### Administrador
-
 <div align="center">
-  <img src="https://i.postimg.cc/13zL2wys/Matricular-Administrador.png" width="200" alt="Matricular Administrador"/>
+  <img src="https://i.postimg.cc/L6mdkG7q/Inicio-Sesion.png" width="200" alt="Inicio Sesión"/>
   <img src="https://i.postimg.cc/Y0w5sPCs/Vista-Principal-Adimistrador.png" width="200" alt="Vista Principal Administrador"/>
+  <img src="https://i.postimg.cc/15KQLy6c/Asignar-Docente-Administrador.png" width="200" alt="Asignar Docente Administrador"/>
+  <img src="https://i.postimg.cc/13zL2wys/Matricular-Administrador.png" width="200" alt="Matricular Administrador"/>
   <img src="https://i.postimg.cc/0y2svh0g/Registrar-Usuarios-Adminitrador.png" width="200" alt="Registrar Usuarios Administrador"/>
+    <img src="https://i.postimg.cc/gkppSxw2/Editar-Usuario-Administrador.png" width="200" alt="Editar Usuario Administrador"/>
   <img src="https://i.postimg.cc/SNdBgDFg/Registrar-Usuario-Administrador.png" width="200" alt="Registrar Usuario Administrador"/>
 </div>
 
-### Docente
-
+### Estudiante
 <div align="center">
-  <img src="https://i.postimg.cc/gkppSxw2/Editar-Usuario-Administrador.png" width="200" alt="Editar Usuario Docente"/>
+  <img src="https://i.postimg.cc/tgZ8Cb1c/Vista-Principal-Estudiante.png" width="200" alt="Vista Principal Estudiante"/>
+  <img src="https://i.postimg.cc/NMThbtBX/Actividades-Estudiante.png" width="200" alt="Actividades Estudiante"/>
+  <img src="https://i.postimg.cc/kGQmMmHC/Entregar-Actividad-Estudiante.png" width="200" alt="Entregar Actividad Estudiante"/>
+  <img src="https://i.postimg.cc/W1WP1S5d/Calificacion-Estudiante.png" width="200" alt="Calificación Estudiante"/>
+  <img src="https://i.postimg.cc/nrD202yz/Laboratorio-Remoto-Estudiante.png" width="200" alt="Laboratorio Remoto Estudiante"/>
+</div>
+
+
+### Docente
+<div align="center">
+  <img src="https://i.postimg.cc/tJtKQz1C/Vista-Principal-Docente.png" width="200" alt="Vista Principal Docente"/>
   <img src="https://i.postimg.cc/pVzxJfLS/Materia-Docente.png" width="200" alt="Materia Docente"/>
+  <img src="https://i.postimg.cc/QMvGpCGs/Agregar-Actividad-Docente.png" width="200" alt="Agregar Actividad Docente"/>
   <img src="https://i.postimg.cc/Xvr6GFPQ/Actividades-Entregadas-Docente.png" width="200" alt="Actividades Entregadas Docente"/>
   <img src="https://i.postimg.cc/dQ2PyJWP/Agregar-Calificacion-Docente.png" width="200" alt="Agregar Calificación Docente"/>
 </div>
 
-### Estudiante
+## Demo
 
-<div align="center">
-  <img src="https://i.postimg.cc/L6mdkG7q/Inicio-Sesion.png" width="200" alt="Inicio Sesión Estudiante"/>
-  <img src="https://i.postimg.cc/15KQLy6c/Asignar-Docente-Administrador.png" width="200" alt="Asignar Docente Administrador"/>
-  <img src="https://i.postimg.cc/NMThbtBX/Actividades-Estudiante.png" width="200" alt="Actividades Estudiante"/>
-  <img src="https://i.postimg.cc/kGQmMmHC/Entregar-Actividad-Estudiante.png" width="200" alt="Entregar Actividad Estudiante"/>
-</div>
+También puedes ver un demo del funcionamiento del laboratorio remoto en el siguiente enlace: [Laboratorio Remoto](https://www.youtube.com/watch?v=V_SwOi3ZlME).
+
+¡Y eso es todo! Ahora deberías tener el frontend de KHAT-TF funcionando localmente en tu máquina. Si tienes alguna pregunta o encuentras algún problema, no dudes en comunicarte con el equipo de desarrollo.
 
 ¡Disfruta explorando KHAT-TF! 🚀
